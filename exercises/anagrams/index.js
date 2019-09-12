@@ -8,29 +8,42 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
+// Sollution 1
+
+// function anagrams(stringA, stringB) {
+//   const aCharMap = buildCharMap(stringA);
+//   const bCharMap = buildCharMap(stringB);
+//   const aCharMapKeys = Object.keys(aCharMap).length
+//   const bCharMapKeys = Object.keys(bCharMap).length
+//   if (aCharMapKeys !== bCharMapKeys) {
+//     return false;
+//   }
+//   for (let char in aCharMap) {
+//     if (aCharMap[char] !== bCharMap[char]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// function buildCharMap(str) {
+//   const charMap = {}
+//   const cleanedStr = str.replace(/[^\w]/g, "").toLowerCase();
+//   for (let char of cleanedStr) {
+//     charMap[char] = char[char] + 1 || 1
+//   }
+//   return charMap
+// }
+
+// Sollution 2
 function anagrams(stringA, stringB) {
-  const aCharMap = buildCharMap(stringA);
-  const bCharMap = buildCharMap(stringB);
-  const aCharMapKeys = Object.keys(aCharMap).length
-  const bCharMapKeys = Object.keys(bCharMap).length
-  if (aCharMapKeys !== bCharMapKeys) {
-    return false;
-  }
-  for (let char in aCharMap) {
-    if (aCharMap[char] !== bCharMap[char]) {
-      return false;
-    }
-  }
-  return true;
+  const cleandedA = cleanString(stringA);
+  const cleandedB = cleanString(stringB);
+  return cleandedA === cleandedB ? true : false
 }
 
-function buildCharMap(str) {
-  const charMap = {}
-  const cleanedStr = str.replace(/[^\w]/g, "").toLowerCase();
-  for (let char of cleanedStr) {
-    charMap[char] = char[char] + 1 || 1
+function cleanString(str) {
+    return str.replace(/[^\w]/g, "").toLowerCase().split('').sort().join('');
   }
-  return charMap
-}
 
 module.exports = anagrams;
